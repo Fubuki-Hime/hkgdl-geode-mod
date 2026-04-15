@@ -10,7 +10,7 @@
 	"name": "HKGDL-Intergration",
 	"version": "v1.0.0",
 	"developer": "HKGD Community",
-	"description": "Shows HKGD Demon List victors when viewing a level. If a level is on the HKGD list, a button will appear to view all victors.",
+	"description": "Shows HKGD Demon List victors when viewing a level.",
 	"dependencies": {
 		"geode.node-ids": ">=v1.23.3"
 	},
