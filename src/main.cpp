@@ -133,40 +133,66 @@ class $modify(HKGDProfilePage, ProfilePage) {
         CCLabelBMFont* hkgdStatsLabel = nullptr;
         std::string hkgdStatsText;
         int hkgdAccountId = 0;
+        bool m_hkgdButtonAdded = false;
     };
-    
+
+    void show() {
+        ProfilePage::show();
+
+        geode::log::info("HKGD: show() called");
+    }
+
     void getUserInfoFinished(GJUserScore* score) {
         ProfilePage::getUserInfoFinished(score);
-        
-        if (!score) return;
-        
+
+        geode::log::info("HKGD: getUserInfoFinished called, score={}, buttonAdded={}", (void*)score, m_fields->m_hkgdButtonAdded);
+
+        if (!score || m_fields->m_hkgdButtonAdded) return;
+
         auto accountName = std::string(score->m_userName);
         auto accountId = score->m_accountID;
-        
+
+        geode::log::info("HKGD: accountName={}, mainLayer={}", accountName, (void*)m_mainLayer);
+
+        if (!m_mainLayer) return;
+
         auto winSize = CCDirector::sharedDirector()->getWinSize();
-        
-        // Create a menu for the HKGD button
-        auto menu = CCMenu::create();
-        menu->setPosition({0, 0});
-        
-        // Create HKGD button with player name
-        std::string btnText = accountName.length() > 10 ? accountName.substr(0, 10) + ".." : accountName;
-        auto hkgdBtnSprite = ButtonSprite::create(btnText.c_str(), "bigFont.fnt", "GJ_button_04.png", 0.8f);
+
+        // Create HKGD button
+        auto hkgdBtnSprite = ButtonSprite::create("HKGD", "bigFont.fnt", "GJ_button_04.png", 0.8f);
+
+        geode::log::info("HKGD: btnSprite={}", (void*)hkgdBtnSprite);
+
+        if (!hkgdBtnSprite) return;
+
         hkgdBtnSprite->setScale(0.5f);
-        
+
         auto hkgdBtn = CCMenuItemSpriteExtra::create(
             hkgdBtnSprite,
             this,
             menu_selector(HKGDProfilePage::onHKGDStats)
         );
-        
-        // Position next to player ranking on the left side
-        hkgdBtn->setPosition({-winSize.width / 2 + 60.f, winSize.height / 2 - 100.f});
+
+        geode::log::info("HKGD: btn={}", (void*)hkgdBtn);
+
+        if (!hkgdBtn) return;
+
+        // Position at top center (was visible here)
+        hkgdBtn->setPosition({90.f, winSize.height / 2 - 50.f});
+
+        // Create menu and add button
+        auto menu = CCMenu::create();
         menu->addChild(hkgdBtn);
-        
-        // Add to main layer
-        m_mainLayer->addChild(menu, 100);
-        
+        menu->setPosition({0, 0});
+        menu->setTag(9999);
+
+        // Add to main layer with high z-order
+        m_mainLayer->addChild(menu, 1000);
+
+        geode::log::info("HKGD: Button added successfully at position y={}", winSize.height / 2 - 60.f);
+
+        m_fields->m_hkgdButtonAdded = true;
+
         // Store the username and account ID for later use
         m_fields->hkgdStatsText = accountName;
         m_fields->hkgdAccountId = accountId;

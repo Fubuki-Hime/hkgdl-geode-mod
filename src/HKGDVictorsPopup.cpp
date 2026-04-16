@@ -679,11 +679,11 @@ CCNode* HKGDPlayerStatsPopup::createRecordCell(HKGDRecord const& record, int ind
     // Date
     auto dateLabel = CCLabelBMFont::create(record.date.c_str(), "bigFont.fnt");
     dateLabel->setAnchorPoint({1, 0.5f});
-    dateLabel->setPosition({180.f, 0});
-    dateLabel->setScale(0.3f);
+    dateLabel->setPosition({130.f, 0});
+    dateLabel->setScale(0.28f);
     dateLabel->setColor({150, 150, 150});
     cell->addChild(dateLabel);
-    
+
     // Video button (if video URL exists)
     if (!record.videoUrl.empty()) {
         auto videoBtnSprite = CCSprite::createWithSpriteFrameName("GJ_playBtn2_001.png");
@@ -694,9 +694,9 @@ CCNode* HKGDPlayerStatsPopup::createRecordCell(HKGDRecord const& record, int ind
                 this,
                 menu_selector(HKGDPlayerStatsPopup::onVideoButton)
             );
-            videoBtn->setPosition({155.f, 0});
+            videoBtn->setPosition({170.f, 0});
             videoBtn->setUserObject(CCString::create(record.videoUrl));
-            
+
             auto menu = CCMenu::create();
             menu->addChild(videoBtn);
             menu->setPosition({0, 0});
