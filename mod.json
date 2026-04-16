@@ -8,15 +8,23 @@
 	},
 	"id": "hkgd-community.hkgdl-intergration",
 	"name": "HKGDL-Intergration",
-	"version": "v1.0.0",
+	"version": "v1.1.0",
 	"developer": "HKGD Community",
 	"description": "Shows HKGD Demon List victors when viewing a level.",
 	"dependencies": {
 		"geode.node-ids": ">=v1.23.3"
 	},
+		"links": {
+		"homepage": "https://hkgdl.dpdns.org/",
+		"source": "https://github.com/HKGDL/hkgdl-geode-mod",
+		"community": "https://discord.gg/tMxDPKn"
+	},
+	"tags": [
+		"utility", "online", "interface"
+	],
 	"settings": {
 		"api-url": {
-			"name": "API URL",
+			"name": "API URL(EDIT ON RISK)",
 			"description": "The HKGD API base URL",
 			"type": "string",
 			"default": "https://api.hkgdl.dpdns.org/api"

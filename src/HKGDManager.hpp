@@ -13,6 +13,7 @@ struct HKGDRecord {
     std::string username;
     std::string date;
     std::string videoUrl;
+    std::string levelName;  // For player stats popup
     std::string fps;
     int attempts = 0;
 };
@@ -25,12 +26,20 @@ struct HKGDLevelInfo {
     bool hasRecords;
 };
 
+struct HKGDSubmissionResult {
+    bool success;
+    std::string message;
+};
+
 class HKGDManager {
 public:
     static HKGDManager* get();
     
     // Get the API base URL from settings
     std::string getApiUrl();
+    
+    // Get the website URL
+    std::string getWebsiteUrl();
     
     // Fetch level info from HKGDL API
     void fetchLevelInfo(int levelId, std::function<void(HKGDLevelInfo)> callback);
@@ -41,9 +50,23 @@ public:
     // Fetch victors for a level
     void fetchVictors(int levelId, std::function<void(std::vector<HKGDRecord>)> callback);
     
+    // Submit a record to HKGDL
+    void submitRecord(int levelId, std::string levelName, std::string username, int attempts, std::string videoUrl, 
+                      std::string fps, std::string date, std::function<void(HKGDSubmissionResult)> callback);
+    
+    // Fetch all HKGDL levels
+    void fetchAllLevels(std::function<void(std::vector<HKGDLevelInfo>)> callback);
+    
+    // Fetch player's beaten extreme demons
+    void fetchPlayerRecords(std::string username, std::function<void(std::vector<HKGDRecord>)> callback);
+    
+    // Check if level is an extreme demon classic
+    bool isExtremeClassicDemon(GJGameLevel* level);
+    
 private:
     static HKGDManager* s_instance;
     std::string m_apiUrl;
+    std::string m_websiteUrl;
     
     HKGDManager();
 };
