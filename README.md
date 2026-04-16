@@ -54,7 +54,10 @@ The mod has a configurable API URL setting:
 
 ## Screenshot
 
-The mod displays a button under the difficulty sprite whenors in a clean popup interface.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/e8726f11-e3ee-4b99-906d-cee04d248d75" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/b87dfb13-f94f-43b8-a009-dbdba9a3a194" />
+
+
 
 ## Credits
 
