@@ -14,6 +14,14 @@
 	"dependencies": {
 		"geode.node-ids": ">=v1.23.3"
 	},
+		"links": {
+		"homepage": "https://hkgdl.dpdns.org/",
+		"source": "https://github.com/HKGDL/hkgdl-geode-mod",
+		"community": "https://discord.gg/tMxDPKn"
+	},
+	"tags": [
+		"utility", "online", "interface"
+	],
 	"settings": {
 		"api-url": {
 			"name": "API URL",
